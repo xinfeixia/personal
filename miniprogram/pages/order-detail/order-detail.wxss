@@ -1,0 +1,161 @@
+.status-card {
+  text-align: center;
+  padding: 60rpx 0;
+}
+
+.status-icon {
+  margin-bottom: 30rpx;
+}
+
+.icon {
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.status-text {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.info-card {
+  margin-bottom: 20rpx;
+}
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 30rpx;
+  color: #333;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20rpx;
+  font-size: 28rpx;
+}
+
+.label {
+  color: #999;
+}
+
+.value {
+  color: #333;
+  flex: 1;
+  text-align: right;
+  margin-left: 20rpx;
+}
+
+.value.order-type-badge {
+  font-size: 24rpx;
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.value.order-type-badge.dine_in {
+  background: #fff5f5;
+  color: #ff6b6b;
+}
+
+.value.order-type-badge.delivery {
+  background: #f0f9ff;
+  color: #2196f3;
+}
+
+.dishes-card {
+  margin-bottom: 20rpx;
+}
+
+.dish-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.dish-image {
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 8rpx;
+  flex-shrink: 0;
+}
+
+.dish-info {
+  flex: 1;
+  margin: 0 20rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 10rpx;
+}
+
+.dish-name {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.dish-quantity {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.dish-price {
+  font-size: 28rpx;
+  color: #ff6b6b;
+  font-weight: bold;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 20rpx;
+  border-top: 1rpx solid #f0f0f0;
+  margin-top: 20rpx;
+}
+
+.total-label {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.total-price {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #ff6b6b;
+}
+
+.actions {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.1);
+  padding: 20rpx 30rpx;
+  display: flex;
+  gap: 20rpx;
+  z-index: 100;
+}
+
+.btn-cancel,
+.btn-pay {
+  flex: 1;
+  height: 80rpx;
+  line-height: 80rpx;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+}
+
+.btn-cancel {
+  background: #fff;
+  color: #666;
+  border: 1rpx solid #e5e5e5;
+}
+
+.btn-pay {
+  background: #ff6b6b;
+  color: #fff;
+}
+

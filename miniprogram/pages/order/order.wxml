@@ -1,0 +1,77 @@
+<view class="container">
+  <view class="tabs">
+    <view 
+      class="tab-item {{currentTab === item.value ? 'active' : ''}}"
+      wx:for="{{tabs}}"
+      wx:key="value"
+      bindtap="switchTab"
+      data-value="{{item.value}}"
+    >
+      {{item.label}}
+    </view>
+  </view>
+
+  <view class="order-list" wx:if="{{orders.length > 0}}">
+    <view class="order-item card" wx:for="{{orders}}" wx:key="id" bindtap="goToDetail" data-id="{{item.id}}">
+      <view class="order-header">
+        <view class="order-header-left">
+          <text class="order-type-badge {{item.order_type}}">
+            {{item.order_type === 'dine_in' ? '🍽️ 堂食' : '🚚 外卖'}}
+          </text>
+          <text class="order-no">{{item.order_no}}</text>
+        </view>
+        <text class="order-status {{item.status}}">{{getStatusText(item.status)}}</text>
+      </view>
+
+      <!-- 堂食信息 -->
+      <view class="order-info" wx:if="{{item.order_type === 'dine_in' && item.table_number}}">
+        <text class="info-item">桌号：{{item.table_number}}</text>
+        <text class="info-item" wx:if="{{item.serve_time}}">上菜时间：{{item.serve_time}}</text>
+      </view>
+      
+      <view class="order-dishes">
+        <view class="dish-item" wx:for="{{item.items}}" wx:key="id" wx:for-item="dish">
+          <image src="{{dish.dish_image}}" class="dish-image" mode="aspectFill" />
+          <view class="dish-info">
+            <text class="dish-name">{{dish.dish_name}}</text>
+            <text class="dish-quantity">x{{dish.quantity}}</text>
+          </view>
+          <text class="dish-price">¥{{dish.price}}</text>
+        </view>
+      </view>
+      
+      <view class="order-footer">
+        <text class="order-total">合计：¥{{item.total_amount}}</text>
+        <view class="order-actions">
+          <button 
+            wx:if="{{item.status === 'pending'}}"
+            class="btn-action btn-primary"
+            size="mini"
+            bindtap="payOrder"
+            data-id="{{item.id}}"
+            catchtap="stopPropagation"
+          >
+            去支付
+          </button>
+          <button 
+            wx:if="{{item.status === 'pending'}}"
+            class="btn-action"
+            size="mini"
+            bindtap="cancelOrder"
+            data-id="{{item.id}}"
+            catchtap="stopPropagation"
+          >
+            取消订单
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:else>
+    <image src="/images/empty-order.png" class="empty-image" mode="aspectFit" />
+    <text class="empty-text">暂无订单</text>
+    <navigator url="/pages/index/index" open-type="switchTab" class="btn-back">去点餐</navigator>
+  </view>
+</view>
+

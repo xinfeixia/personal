@@ -1,0 +1,87 @@
+<view class="container">
+  <view class="cart-list" wx:if="{{cartItems.length > 0}}">
+    <view class="cart-item card" wx:for="{{cartItems}}" wx:key="id">
+      <image src="{{item.dish.image}}" class="item-image" mode="aspectFill" />
+      <view class="item-info">
+        <view class="item-name">{{item.dish.name}}</view>
+        <view class="item-footer">
+          <view class="item-price">¥{{item.dish.price}}</view>
+          <view class="item-control">
+            <view class="btn-minus" bindtap="decreaseCount" data-id="{{item.dish.id}}">-</view>
+            <text class="count">{{item.count}}</text>
+            <view class="btn-add" bindtap="increaseCount" data-id="{{item.dish.id}}">+</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty" wx:else>
+    <image src="/images/empty-cart.png" class="empty-image" mode="aspectFit" />
+    <text class="empty-text">购物车是空的</text>
+    <navigator url="/pages/index/index" open-type="switchTab" class="btn-back">去点餐</navigator>
+  </view>
+
+  <view class="order-form card" wx:if="{{cartItems.length > 0}}">
+    <!-- 订单类型选择 -->
+    <view class="order-type-selector">
+      <view class="type-option {{orderType === 'dine_in' ? 'active' : ''}}" bindtap="selectOrderType" data-type="dine_in">
+        <view class="type-icon">🍽️</view>
+        <view class="type-name">堂食</view>
+      </view>
+      <view class="type-option {{orderType === 'delivery' ? 'active' : ''}}" bindtap="selectOrderType" data-type="delivery">
+        <view class="type-icon">🚚</view>
+        <view class="type-name">外卖</view>
+      </view>
+    </view>
+
+    <!-- 堂食信息 -->
+    <view wx:if="{{orderType === 'dine_in'}}">
+      <view class="form-title">堂食信息</view>
+      <view class="form-item">
+        <text class="label">桌号</text>
+        <input class="input" placeholder="请输入桌号" value="{{tableNumber}}" bindinput="onTableNumberInput" />
+      </view>
+      <view class="form-item">
+        <text class="label">上菜时间</text>
+        <picker mode="selector" range="{{serveTimeOptions}}" value="{{serveTimeIndex}}" bindchange="onServeTimeChange">
+          <view class="picker">{{serveTimeOptions[serveTimeIndex] || '请选择上菜时间'}}</view>
+        </picker>
+      </view>
+      <view class="form-item">
+        <text class="label">备注</text>
+        <textarea class="textarea" placeholder="选填，可以告诉我们您的特殊需求" value="{{remark}}" bindinput="onRemarkInput" />
+      </view>
+    </view>
+
+    <!-- 外卖信息 -->
+    <view wx:else>
+      <view class="form-title">配送信息</view>
+      <view class="form-item">
+        <text class="label">联系人</text>
+        <input class="input" placeholder="请输入联系人" value="{{contactName}}" bindinput="onContactNameInput" />
+      </view>
+      <view class="form-item">
+        <text class="label">联系电话</text>
+        <input class="input" type="number" placeholder="请输入联系电话" value="{{contactPhone}}" bindinput="onContactPhoneInput" />
+      </view>
+      <view class="form-item">
+        <text class="label">配送地址</text>
+        <textarea class="textarea" placeholder="请输入配送地址" value="{{deliveryAddress}}" bindinput="onDeliveryAddressInput" />
+      </view>
+      <view class="form-item">
+        <text class="label">备注</text>
+        <textarea class="textarea" placeholder="选填，可以告诉我们您的特殊需求" value="{{remark}}" bindinput="onRemarkInput" />
+      </view>
+    </view>
+  </view>
+
+  <view class="bottom-bar" wx:if="{{cartItems.length > 0}}">
+    <view class="total-info">
+      <text class="total-label">合计：</text>
+      <text class="total-price">¥{{totalPrice}}</text>
+    </view>
+    <button class="btn-submit btn-primary" bindtap="submitOrder" loading="{{submitting}}">提交订单</button>
+  </view>
+</view>
+
